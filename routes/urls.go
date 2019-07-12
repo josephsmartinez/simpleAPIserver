@@ -1,3 +1,4 @@
+package routes
 
 import (
 	"fmt"
@@ -5,7 +6,7 @@ import (
 )
 
 // Request handler
-func get(conn net.Conn) {
+func Get(conn net.Conn) {
 
 	body := `get`
 
@@ -17,7 +18,7 @@ func get(conn net.Conn) {
 
 }
 
-func post(conn net.Conn) {
+func Post(conn net.Conn) {
 	body := `post`
 
 	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
@@ -27,7 +28,7 @@ func post(conn net.Conn) {
 	fmt.Fprint(conn, body)
 }
 
-func delete(conn net.Conn) {
+func Delete(conn net.Conn) {
 	body := `delete`
 
 	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
@@ -38,7 +39,7 @@ func delete(conn net.Conn) {
 
 }
 
-func put(conn net.Conn) {
+func Put(conn net.Conn) {
 	body := `put`
 
 	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
@@ -49,7 +50,7 @@ func put(conn net.Conn) {
 
 }
 
-func notFound(conn net.Conn) {
+func NotFound(conn net.Conn) {
 
 	body := `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title></title></head><body><strong>404</strong></body></html>`
 
@@ -62,7 +63,7 @@ func notFound(conn net.Conn) {
 }
 
 // Routes for HTML handlers
-func home(conn net.Conn) {
+func Home(conn net.Conn) {
 
 	body := `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title></title></head><body><strong>HOME</strong></body></html>`
 
@@ -73,6 +74,6 @@ func home(conn net.Conn) {
 	fmt.Fprint(conn, body)
 
 }
-func about() {
+func About() {
 
 }
