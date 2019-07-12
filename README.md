@@ -1,5 +1,7 @@
 # simpleAPIserver
 
+<a href="https://travis-ci.com/josephsmartinez/simpleAPIserver"><img src="https://travis-ci.com/josephsmartinez/simpleAPIserver.svg?branch=master" alt="Build status" align="left"/></a>
+
 ## Simple Server Route Checks
 
 `go run server.go`  
