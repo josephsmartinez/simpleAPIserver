@@ -3,13 +3,21 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"html/template"
 	"log"
 	"net"
 	"strings"
 )
 
+// Initialize all templates
+func init() {
+	tpl = template.Must(template.ParseGlob("templates/*"))
+}
+
+// Package level struct pointer
 var (
 	requestData = newHTTPRequestData()
+	tpl         *template.Template
 )
 
 // Define networking param
@@ -70,99 +78,27 @@ func request(conn net.Conn) {
 	}
 }
 
+// UPDATE CONDITIONAL STATEMENT WITH IF STATEMENTS
 func respond(conn net.Conn) {
 
 	if strings.Compare(requestData.RequestLine, "/") == 0 {
 		home(conn)
 	} else if strings.Compare(requestData.RequestLine, "/api") == 0 {
-		switch requestData.Method {
-		case "GET":
-			get(conn)
-		case "POST":
-			post(conn)
-		case "DELETE":
-			delete(conn)
-		case "PUT":
-			put(conn)
-		default:
-			notFound(conn)
-		}
+		// switch requestData.Method {
+		// case "GET":
+		// 	get(conn)
+		// case "POST":
+		// 	post(conn)
+		// case "DELETE":
+		// 	delete(conn)
+		// case "PUT":
+		// 	put(conn)
+		// default:
+		// 	notFound(conn)
+		// }
 	} else {
 		notFound(conn)
 	}
-
-}
-
-// Request handler
-func get(conn net.Conn) {
-
-	body := `get`
-
-	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
-	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-	fmt.Fprint(conn, "Content-Type: text/html\r\n")
-	fmt.Fprint(conn, "\r\n")
-	fmt.Fprint(conn, body)
-
-}
-
-func post(conn net.Conn) {
-	body := `post`
-
-	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
-	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-	fmt.Fprint(conn, "Content-Type: text/html\r\n")
-	fmt.Fprint(conn, "\r\n")
-	fmt.Fprint(conn, body)
-}
-
-func delete(conn net.Conn) {
-	body := `delete`
-
-	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
-	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-	fmt.Fprint(conn, "Content-Type: text/html\r\n")
-	fmt.Fprint(conn, "\r\n")
-	fmt.Fprint(conn, body)
-
-}
-
-func put(conn net.Conn) {
-	body := `put`
-
-	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
-	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-	fmt.Fprint(conn, "Content-Type: text/html\r\n")
-	fmt.Fprint(conn, "\r\n")
-	fmt.Fprint(conn, body)
-
-}
-
-func notFound(conn net.Conn) {
-
-	body := `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title></title></head><body><strong>404</strong></body></html>`
-
-	fmt.Fprint(conn, "HTTP/1.1 404 OK\r\n")
-	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-	fmt.Fprint(conn, "Content-Type: text/html\r\n")
-	fmt.Fprint(conn, "\r\n")
-	fmt.Fprint(conn, body)
-
-}
-
-// Routes for HTML handlers
-func home(conn net.Conn) {
-
-	body := `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title></title></head><body><strong>HOME</strong></body></html>`
-
-	fmt.Fprint(conn, "HTTP/1.1 200 OK\r\n")
-	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-	fmt.Fprint(conn, "Content-Type: text/html\r\n")
-	fmt.Fprint(conn, "\r\n")
-	fmt.Fprint(conn, body)
-
-}
-func about() {
 
 }
 
