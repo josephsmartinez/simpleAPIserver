@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-var x = auth.Auth
-
 // Initialize all templates
 func init() {
 	tpl = template.Must(template.ParseGlob("templates/*"))
